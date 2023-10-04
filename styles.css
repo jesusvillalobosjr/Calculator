@@ -1,0 +1,178 @@
+html,body{
+    margin : 0;
+    box-sizing: border-box;
+}
+
+.calculator-container{
+    height: 100vh;
+    background-image: linear-gradient(to right, #DECBA4, #3E5151);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.calculator-container .calculator{
+    height: 600px;
+    width: 450px;
+    background-color: #8C92AC;
+    border-radius: 50px;
+    padding: 25px;
+}
+
+.calculator-container .calculator .display{
+    height: 150px;
+    background-color: gainsboro;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: end;
+    gap: 10px;
+    padding-right: 30px;
+}
+
+.calculator-container .calculator .display .current-operation{
+    margin: 0;
+}
+
+.calculator-container .calculator .display .result{
+    margin: 0;
+    font-size: 3rem;
+}
+
+.calculator-container .calculator .buttons{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 30px;
+    gap: 30px;
+}
+
+.calculator-container .calculator .buttons div{
+    height: 75px;
+    width: 45%;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.calculator-container .calculator .buttons .clear,.calculator-container .calculator .buttons .delete{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+}  
+
+.calculator-container .calculator .buttons .clear{
+    background-color: white;
+    color: black;
+    transition: all 300ms;
+}
+
+.calculator-container .calculator .buttons .clear:hover{
+    background-color: red;
+    color: white;
+}
+
+.calculator-container .calculator .buttons .delete{
+    background-color: black;
+    color: white;
+    transition: all 300ms;
+}
+
+.calculator-container .calculator .buttons .delete:hover{
+    background-color: blue;
+    color: white;
+}
+
+.calculator-container .calculator .operations{
+    margin-top: 20px;
+    display: grid;
+    grid-template-areas: 'seven eight nine divide'
+                         'four five six multiply'
+                         'one two three substract'
+                         'period zero plus equals';
+    justify-items: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.calculator-container .calculator .operations div{
+    height: 75px;
+    width: 75px;
+    background-color: #D3D3D3;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 1.5rem;
+    transition: all 300ms;
+}
+
+.calculator-container .calculator .operations div:hover{
+    background-color: yellow;
+    color: black;
+}
+
+.calculator-container .calculator .operations .seven{
+    grid-area: seven;
+}
+
+.calculator-container .calculator .operations .eight{
+    grid-area: eight;
+}
+
+.calculator-container .calculator .operations .nine{
+    grid-area: nine;
+}
+
+.calculator-container .calculator .operations .divide{
+    grid-area: divide;
+}
+
+.calculator-container .calculator .operations .four{
+    grid-area: four;
+}
+
+.calculator-container .calculator .operations .five{
+    grid-area: five;
+}
+
+.calculator-container .calculator .operations .six{
+    grid-area: six;
+}
+
+.calculator-container .calculator .operations .multiply{
+    grid-area: multiply;
+}
+
+.calculator-container .calculator .operations .one{
+    grid-area: one;
+}
+
+.calculator-container .calculator .operations .two{
+    grid-area: two;
+}
+
+.calculator-container .calculator .operations .three{
+    grid-area: three;
+}
+
+.calculator-container .calculator .operations .substract{
+    grid-area: substract;
+}
+
+.calculator-container .calculator .operations .period{
+    grid-area: period;
+}
+
+.calculator-container .calculator .operations .zero{
+    grid-area: zero;
+}
+
+.calculator-container .calculator .operations .plus{
+    grid-area: plus;
+}
+
+.calculator-container .calculator .operations .equals{
+    grid-area: equals;
+}
