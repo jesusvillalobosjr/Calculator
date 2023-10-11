@@ -1,33 +1,49 @@
 function determineOperation(e){
+    if(result.textContent.length >= 14 && !resultGiven)
+        return;
+
+    resetResultFontSize();
     let ch = e.target.textContent;
 
-    if(ch !== "=")
+    if(isOperation(ch)){
+        resultGiven = false;
+        return;
+    }
+    else
         clearAfterResultGiven();
-
-    if(!isOperation(ch) && !isEqualSign(ch))
         result.append(ch);
 }
 
 function getResult(){
+    var number = result.textContent;
     if(validOperation()){
-        var currentOperator = operator.textContent;
+        let currentOperator = operator.textContent;
+        let answer;
         switch(currentOperator){
             case "+":
-                result.textContent = `${parseFloat(firstNumber.textContent) + parseFloat(result.textContent)}`;
+                answer = Math.round((parseFloat(firstNumber.textContent) + parseFloat(result.textContent)) * 100) / 100;
+                result.textContent = `${answer}`;
+                if(overFourteenResultLength(result)) result.style.fontSize = "30px";
                 break;
             case "-":
-                result.textContent = `${parseFloat(firstNumber.textContent) - parseFloat(result.textContent)}`;
+                answer = Math.round((parseFloat(firstNumber.textContent) - parseFloat(result.textContent)) * 100) / 100;
+                result.textContent = `${answer}`;
+                if(overFourteenResultLength(result)) result.style.fontSize = "30px";
                 break;
             case "X":
-                result.textContent = `${parseFloat(firstNumber.textContent) * parseFloat(result.textContent)}`;
+                answer = Math.round((parseFloat(firstNumber.textContent) * parseFloat(result.textContent)) * 100) / 100;
+                result.textContent = `${answer}`;
+                if(overFourteenResultLength(result)) result.style.fontSize = "30px";
                 break;
             case "%":
-                result.textContent = `${parseFloat(firstNumber.textContent) / parseFloat(result.textContent)}`;
+                answer = Math.round((parseFloat(firstNumber.textContent) / parseFloat(result.textContent)) * 100) / 100;
+                result.textContent = `${answer}`;
+                if(overFourteenResultLength(result)) result.style.fontSize = "30px";
                 break;
         }
 
         resultGiven = true;
-        setCurrentOperation();
+        setCurrentOperation(number);
     }
 }
 
@@ -36,32 +52,26 @@ function clear(){
     operator.textContent = "";
     secondNumber.textContent = "";
     result.textContent = "";
+    resultGiven = false;
 }
 
 function clearAfterResultGiven(){
     if(resultGiven){
-        result.textContent = "";
+        clear();
         resultGiven = false;
     }
 }
 
-function setCurrentOperation(){
-    let currentOperator = operator.textContent;
+function resetResultFontSize(){
+    result.style.fontSize = "3rem";
+}
 
-    switch(currentOperator){
-        case "+":
-            secondNumber.textContent = `${result.textContent - firstNumber.textContent}`;
-            break;
-        case "-":
-            secondNumber.textContent = `${firstNumber.textContent - result.textContent}`;
-            break;
-        case "X":
-            secondNumber.textContent = `${result.textContent / firstNumber.textContent}`;
-            break;
-        case "%":
-            secondNumber.textContent = `${firstNumber.textContent / result.textContent}`;
-            break;
-    }
+function overFourteenResultLength(result){
+    return result.textContent.length >= 14;
+}
+
+function setCurrentOperation(number){
+    secondNumber.textContent = number;
 }
 
 function clearCurrentOperation(){
@@ -101,6 +111,14 @@ function operatorInPlace(){
     return operator.textContent !== "";
 }
 
+function deleteNumbers(){
+    if(result.textContent !== ""){
+        var text = result.textContent.split("");
+        text.pop();
+        result.textContent = text.join("");
+    }
+}
+
 const clearButton = document.querySelector(".clear");
 const deleteButton = document.querySelector(".delete");
 const currentOperation = document.querySelector(".current-operation");
@@ -122,5 +140,5 @@ divide.addEventListener("click",operatorClicked);
 multiply.addEventListener("click",operatorClicked);
 clearButton.addEventListener("click",clear);
 equals.addEventListener("click",getResult);
-deleteButton.addEventListener("click",() => console.log("delete"));
+deleteButton.addEventListener("click",deleteNumbers);
 operationButtons.forEach(operation => operation.addEventListener("click",determineOperation))
