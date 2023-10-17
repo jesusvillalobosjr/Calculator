@@ -40,6 +40,8 @@ function getResult(){
                 break;
             case "%":
                 answer = Math.round((parseFloat(firstNumber.textContent) / parseFloat(result.textContent)) * 100) / 100;
+                answer = (answer !== Infinity) ? answer : "ERROR";
+                console.log(answer);
                 result.textContent = `${answer}`;
                 if(overFourteenResultLength(result)) result.style.fontSize = "30px";
                 break;
