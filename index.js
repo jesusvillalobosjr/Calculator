@@ -5,6 +5,9 @@ function determineOperation(e){
     resetResultFontSize();
     let ch = e.target.textContent;
 
+    if(decimalClicked && ch === ".")
+        return;
+
     if(isOperation(ch)){
         resultGiven = false;
         return;
@@ -43,6 +46,7 @@ function getResult(){
         }
 
         resultGiven = true;
+        decimalClicked = false;
         setCurrentOperation(number);
     }
 }
@@ -89,6 +93,8 @@ function operatorClicked(event){
         operator.textContent = event.target.textContent;
         result.textContent = "";
     }
+
+    decimalClicked = false;
 }
 
 function isOperation(content){
@@ -132,7 +138,10 @@ const minus = document.querySelector(".minus");
 const divide = document.querySelector(".divide");
 const multiply = document.querySelector(".multiply");
 const equals = document.querySelector(".equals");
+const decimal = document.querySelector(".period");
+
 let resultGiven = false;
+let decimalClicked = false;
 
 plus.addEventListener("click",operatorClicked);
 minus.addEventListener("click",operatorClicked);
@@ -141,4 +150,5 @@ multiply.addEventListener("click",operatorClicked);
 clearButton.addEventListener("click",clear);
 equals.addEventListener("click",getResult);
 deleteButton.addEventListener("click",deleteNumbers);
-operationButtons.forEach(operation => operation.addEventListener("click",determineOperation))
+operationButtons.forEach(operation => operation.addEventListener("click",determineOperation));
+decimal.addEventListener("click",() => decimalClicked = true);
